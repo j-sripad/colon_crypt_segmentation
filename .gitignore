@@ -1,2 +1,8 @@
-Colonic_crypt_dataset
-
+Colonic_crypt_dataset/
+data/
+data_no_bg_imb/
+data_unbalanced/
+models/
+test/
+utility notebooks/
+data_no_bg_imb/
