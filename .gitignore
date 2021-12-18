@@ -6,3 +6,6 @@ models/
 test/
 utility notebooks/
 data_no_bg_imb/
+result_patches/
+feature_maps_train_test.pkl
+feature_maps_train_test.pkl
