@@ -110,7 +110,43 @@ Colonic_crypt_dataset
     
 **Inference**
 
+ - The inference script (inference.ipynb) performs infernce on the test data and generates submission csv. It has a lot of helper functions to predict masks at patch level and stictching back th mask patches to the original mask, for calculating the  dice socre, and generating the submission csv.
+ - This notebook generates the followung csvs:
+     - submission.csv (contains test data image ids and RLE of their corresponding predicted mask)
+     - dice_report_submission.csv (Has the information of test set dice score per image and their average dice score)
+     - dice_report_train_predictions.csv (Has the information of train set dice score per image and their average dice score)
+ - Test data scores  
+ ```
+                id	                        dice
+1	CL_HandE_1234_B004_bottomleft	0.9118206257983936
+2	HandE_B005_CL_b_RGB_bottomleft	0.795089196189986
+3	Average	                        0.8534549109941898
+```
+     
+- Train data dice score
+```
+                 id	                    dice
+1	CL_HandE_1234_B004_bottomright	0.8076528265406101
+2	CL_HandE_1234_B004_topleft	    0.9154728206067088
+3	CL_HandE_1234_B004_topright	    0.9112342804027279
+4	HandE_B005_CL_b_RGB_bottomright	0.884394673078839
+5	HandE_B005_CL_b_RGB_topleft	    0.8945819437687517
+6	Average	                        0.8826673088795275
+```
 
+
+**Predictions**
+ - The inference.ipynb has a code to overlay predictions on the original patch. Below are the sample outputs.
+ ![image](overlays/CL_HandE_1234_B004_bottomleft_11.jpg) 
+ ![image](overlays/CL_HandE_1234_B004_bottomleft_16.jpg) 
+ ![image](overlays/HandE_B005_CL_b_RGB_bottomleft_4.jpg)
+
+ 
+ 
+**Improvements needed**
+![image](overlays/CL_HandE_1234_B004_bottomleft_6.jpg)
+
+ 
     
   
 
