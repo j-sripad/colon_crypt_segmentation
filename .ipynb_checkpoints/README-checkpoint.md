@@ -53,19 +53,6 @@ Colonic_crypt_dataset
 
 - Mask Generation
 
-    - The dataset already has masks generated for training and test sets. But if required, use **Mask_from_RLE.ipynb** notebook to generate masks from RLR using the train and test csv files.
-    
-    
- - Patch Generation
-   - The training image shape is (4536, 4704,3). So, generated patches of shape (512,512,3) for training. 
-   - For patch generation, used window size of (512,512) and stride of (256,256). So there was slight overlap. The patch generation was "valid". Also, code to ignore patches with black rectangular artifacts found on our training and testing WSIs is implemted.
-   
-    - For patch generation, **Datapreparation.ipynb** notebook is used. This notebook creates a **data/images** and **data/masks** directories to save the image patches and their coreesponding masks. The notebook also returns a csv **train_data.csv** that has the following three columns.
-        - Train_image_path
-        - Train_mask_path
-        - Class (1 if mask contain crypt annotation,else 0)
-        
-        
-    
-  
+    - The dataset already has masks generated for training and test sets. But if required, use **Mask_from_RLE.ipynb** notebook to generate masks from RLR using the train and test csv files
+
 
