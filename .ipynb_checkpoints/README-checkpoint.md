@@ -191,6 +191,9 @@ The plots above represent the overlap between crypt/ non crypt class datapoints.
 
 ![image](viz_overlays/TSNE_train_test.jpg) 
 
+The training and test set datapoints overlap
+
+
 Here
 - class 1 represents the feature representation of a patch which has atleast one crypt.
 - class 0 represents the feature representation of a patch which has not crypts in it at all
@@ -210,6 +213,8 @@ Here
 
 ![image](viz_overlays/UMAP_train_class.jpg) 
 ![image](viz_overlays/UMAP_test_class.jpg) 
+The plots above represent the overlap between crypt/ non crypt class datapoints. The overlap between the classes is because as our patches with crypts also have significant backgroud (non crypt) class information.
+
 
 
 
@@ -217,12 +222,16 @@ Here
 
 ![image](viz_overlays/MDS_train_test.jpg) 
 
+The training and test datapoints are overlapping
+
 Here
 - class 1 represents the feature representation of a patch which has atleast one crypt.
 - class 0 represents the feature representation of a patch which has not crypts in it at all
 
 ![image](viz_overlays/MDS_train_class.jpg) 
 ![image](viz_overlays/MDS_test_class.jpg) 
+The plots above represent the overlap between crypt/ non crypt class datapoints. The overlap between the classes is because as our patches with crypts also have significant backgroud (non crypt) class information.
+
 
 
  
