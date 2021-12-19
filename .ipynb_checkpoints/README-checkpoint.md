@@ -160,7 +160,71 @@ Colonic_crypt_dataset
  I think the number of crypts examples in traning data is  lower than the background class. Increasing the crypt data will help improve the segmentation results.
  
  
+**Visualizations**
+
+ notebook - **viz.ipynb**
  
+ - Feature representation generation
+     - Took the  segmentation model we trained above (with weights), and set it to return the output feature maps of the last convolutional block of the encoder.
+     - Passed the patches(train and test) through the network, generated their respective feature maps, which when flattened are one dimensional vectors.
+     - Used these feature representations of the patches for visualization
+     - Due to size limit on github, couldn't upload the feature_representation.pkl file. Please find it here - https://drive.google.com/file/d/1RcX8Pvi6rEx3J-RNjKbOEUFbkkToo-na/view?usp=sharing
+     
+**PCA**
+
+![image](viz_overlays/PCA_train_test.jpg) 
+
+As we can see, the training data and test data are very much in the same space as the data is from same domain
+
+Here
+- class 1 represents the feature representation of a patch which has atleast one crypt.
+- class 0 represents the feature representation of a patch which has not crypts in it at all
+
+![image](viz_overlays/PCA_train_class.jpg) 
+![image](viz_overlays/PCA_test_class.jpg) 
+
+The plots above represent the overlap between crypt/ non crypt class datapoints. The overlap between the classes is because as our patches with crypts also have significant backgroud (non crypt) class information.
+
+
+
+**TSNE**
+
+![image](viz_overlays/TSNE_train_test.jpg) 
+
+Here
+- class 1 represents the feature representation of a patch which has atleast one crypt.
+- class 0 represents the feature representation of a patch which has not crypts in it at all
+
+![image](viz_overlays/TSNE_train_class.jpg) 
+![image](viz_overlays/TSNE_test_class.jpg) 
+
+The plots above represent the overlap between crypt/ non crypt class datapoints. 
+
+**UMAP**
+
+![image](viz_overlays/UMAP_train_test.jpg) 
+
+Here
+- class 1 represents the feature representation of a patch which has atleast one crypt.
+- class 0 represents the feature representation of a patch which has not crypts in it at all
+
+![image](viz_overlays/UMAP_train_class.jpg) 
+![image](viz_overlays/UMAP_test_class.jpg) 
+
+
+
+**MDS**
+
+![image](viz_overlays/MDS_train_test.jpg) 
+
+Here
+- class 1 represents the feature representation of a patch which has atleast one crypt.
+- class 0 represents the feature representation of a patch which has not crypts in it at all
+
+![image](viz_overlays/MDS_train_class.jpg) 
+![image](viz_overlays/MDS_test_class.jpg) 
+
+
  
  
  
