@@ -140,12 +140,42 @@ Colonic_crypt_dataset
  ![image](overlays/CL_HandE_1234_B004_bottomleft_11.jpg) 
  ![image](overlays/CL_HandE_1234_B004_bottomleft_16.jpg) 
  ![image](overlays/HandE_B005_CL_b_RGB_bottomleft_4.jpg)
+ ![image](overlays/CL_HandE_1234_B004_bottomleft_17.jpg)
+
+
+ 
+**Incorrectly segmented outputs**
+
+- The below images are some examples where the model didn't perform well.
+ 
+ 
+ ![image](overlays/HandE_B005_CL_b_RGB_bottomleft_3.jpg)
+ 
+ I think the model didn't perform well on the above example because, majority of the crypts in training examples have darker boundary texture and the inside is more often than not lighter. In the example above, the missegmented crypt doesn't seem to have a definite dark boundary.
+ 
  ![image](overlays/CL_HandE_1234_B004_bottomleft_6.jpg)
+ 
+ Here is another example where the model didn't perform well.
+ 
+ I think the number of crypts examples in traning data is  lower than the background class. Increasing the crypt data will help improve the segmentation results.
+ 
+ 
+**Visualizations**
 
+ notebook - **viz.ipynb**
+ 
+ - 
+ 
+ 
+ 
+ 
+ 
+ 
 
  
  
-**Improvements needed**
+
+ 
 
  
     
