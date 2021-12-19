@@ -66,6 +66,51 @@ Colonic_crypt_dataset
         - Class (1 if mask contain crypt annotation,else 0)
         
         
+    - We use the csv generated here as an input to out pytorch Dataset to access images and masks.
+    
+
+**Training** 
+
+ - Dataset
+     - We use the **train_data.csv** previously generated to access the training data.
+     - Applied the following transforms on the training data (in utils.py):
+         ```
+         A.Compose([
+            A.HorizontalFlip(),
+            A.VerticalFlip(),
+            A.RandomRotate90(),
+            A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=0.2, rotate_limit=15, p=0.9,
+                             border_mode=cv2.BORDER_REFLECT),
+            A.OneOf([
+                A.ElasticTransform(p=.3),
+                A.GaussianBlur(p=.3),
+                A.GaussNoise(p=.3),
+                A.OpticalDistortion(p=0.3),
+                A.GridDistortion(p=.1),
+                A.PiecewiseAffine(p=0.3),
+            ], p=0.3),
+            A.OneOf([
+                A.HueSaturationValue(15,25,0),
+                A.CLAHE(clip_limit=2),
+                A.RandomBrightnessContrast(brightness_limit=0.3, contrast_limit=0.3),
+            ], p=0.3),
+
+         ```
+     - I trained segmentation models using Linknet, Unet, UnetPlusPlus and  Multi-Attention networs architectures with different backbone encoders like efficientnet-b2, efficientnet-b3, resnet50 etx.
+     - Unet and UnetPlusPlus architectures performed the best with Unet with efficientnetb2 fetching me the best dice score.
+     - Trained the model for 5 folds and picked the best model. models/fold3. 
+     - Used crossentropy loss for training, with Ranger optimizer (RAdam + Lookahead).
+     For Ranger optimizer please install
+     ```
+     pip3 install torch-optimizer 
+     ```
+    - Implemented early stopping with patience=5 monitoring the validation loss.
+    - The training steps with metrics and losses per each epoch of every fold is stored as csv file in **models/** folder.
+    - From my training the model/fold3 was the best model.
+    
+**Inference**
+
+
     
   
 
