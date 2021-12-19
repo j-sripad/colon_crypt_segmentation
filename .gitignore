@@ -8,3 +8,7 @@ data_no_bg_imb/
 result_patches/
 feature_maps_train_test.pkl
 feature_maps_train_test.pkl
+.ipynb_checkpoints
+__pycache__
+.gitignore
+
