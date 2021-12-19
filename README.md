@@ -126,12 +126,12 @@ Colonic_crypt_dataset
 - Train data dice score
 ```              
 	          id	                    dice
-1	CL_HandE_1234_B004_bottomright	0.936980592055458
-2	CL_HandE_1234_B004_topleft	    0.9195726177015423
-3	CL_HandE_1234_B004_topright  	0.9216310830724985
-4	HandE_B005_CL_b_RGB_bottomright	0.8983568682591906
-5	HandE_B005_CL_b_RGB_topleft	    0.9104829978846856
-6	   Average	                     0.9174048317946749
+1	CL_HandE_1234_B004_bottomright	  0.936980592055458
+2	CL_HandE_1234_B004_topleft	      0.9195726177015423
+3	CL_HandE_1234_B004_topright  	  0.9216310830724985
+4	HandE_B005_CL_b_RGB_bottomright	  0.8983568682591906
+5	HandE_B005_CL_b_RGB_topleft	      0.9104829978846856
+6	   Average	                      0.9174048317946749
 ```
 ** The inference is done by predicting over all the 5 models we trained and then taking the acverage pixelwise probabilities.
 
