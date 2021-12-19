@@ -97,21 +97,7 @@ class PatchExtractor(object):
             for col in range(0, w_last, self.step_size[1]):
                 win = self.__get_patch(x, (row, col))
                 sub_patches.append(win)  
-        #### Deal with edge case
-#         if h_flag:
-#             row = im_h - self.win_size[0]
-#             for col in range(0, w_last, self.step_size[1]):
-#                 win = self.__get_patch(x, (row, col))
-#                 sub_patches.append(win)  
-#         if w_flag:
-#             col = im_w - self.win_size[1]
-#             for row in range(0, h_last, self.step_size[0]):
-#                 win = self.__get_patch(x, (row, col))
-#                 sub_patches.append(win)  
-#         if h_flag and w_flag:
-#             ptx = (im_h - self.win_size[0], im_w - self.win_size[1])
-#             win = self.__get_patch(x, ptx)
-#             sub_patches.append(win)  
+
         return sub_patches
     
     def __extract_mirror(self, x):
@@ -156,8 +142,8 @@ class PatchExtractor(object):
 ###########################################################################
 
 if __name__ == '__main__':
-    # toy example for debug
-    # 355x355, 480x480
+   
+    #We used this in our previous office.
     xtractor = PatchExtractor((450, 450), (120, 120), debug=True)
     a = np.full([1200, 1200, 3], 255, np.uint8)
     xtractor.extract(a, 'mirror')
