@@ -28,7 +28,7 @@ submission.csv
 
 **Dataset** - https://drive.google.com/file/d/1RHQjRav-Kw1CWT30iLJMDQ2hPMyIwAUi/view?usp=sharing
 
-After downloading the data and extracting the files in the above directory structure, it has the following directory structure
+After downloading the data and extracting the files in the above directory structure, it has the following folders.
 
 ```
 Colonic_crypt_dataset
@@ -53,20 +53,20 @@ Colonic_crypt_dataset
 
 - Mask Generation
 
-    - The dataset already has masks generated for training and test sets. But if required, use **Mask_from_RLE.ipynb** notebook to generate masks from RLR using the train and test csv files.
+    - The dataset already has masks generated for training and test sets. But if required, use **Mask_from_RLE.ipynb** notebook to generate masks from RLE using the train and test csv files.
     
     
  - Patch Generation
-   - The training image shape is (4536, 4704,3). So, generated patches of shape (512,512,3) for training. 
-   - For patch generation, used window size of (512,512) and stride of (256,256). So there was slight overlap. The patch generation was "valid". Also, code to ignore patches with black rectangular artifacts found on our training and testing WSIs is implemted.
+   - The image shape is (4536, 4704,3). So, generated patches of shape (512,512,3) for training. 
+   - For patch generation, used window size of (512,512) and stride of (256,256). So there was slight overlap. Used "valid" operation for patch generation. Also, code to ignore patches with black rectangular artifacts found on our training and testing WSIs is implemted.
    
-    - For patch generation, **Datapreparation.ipynb** notebook is used. This notebook creates a **data/images** and **data/masks** directories to save the image patches and their coreesponding masks. The notebook also returns a csv **train_data.csv** that has the following three columns.
+    - For patch generation, **Datapreparation.ipynb** notebook is used. This notebook creates  **data/images** and **data/masks** directories to save the image patches and their coresponding masks. The notebook also returns a csv **train_data.csv** that has the following three columns.
         - Train_image_path
         - Train_mask_path
         - Class (1 if mask contain crypt annotation,else 0)
         
         
-    - We use the csv generated here as an input to out pytorch Dataset to access images and masks.
+    - We use the csv generated here as an input to our pytorch Dataset to access images and masks.
     
 
 **Training** 
@@ -96,8 +96,8 @@ Colonic_crypt_dataset
             ], p=0.3),
 
          ```
-     - I trained segmentation models using Linknet, Unet, UnetPlusPlus and  Multi-Attention networs architectures with different backbone encoders like efficientnet-b2, efficientnet-b3, resnet50 etx.
-     - Unet and UnetPlusPlus architectures performed the best with Unet with efficientnetb2 fetching me the best dice score.
+     - I trained segmentation models using Linknet, Unet, UnetPlusPlus and  Multi-Attention network architectures with different backbone encoders like efficientnet-b2, efficientnet-b3, resnet50 etc.
+     - Unet and UnetPlusPlus architectures performed the best, with Unet - efficientnetb2 fetching me the best dice score.
      - Trained the model for 5 folds. 
      - Used crossentropy loss for training, with Ranger optimizer (RAdam + Lookahead).
      For Ranger optimizer please install
@@ -105,16 +105,16 @@ Colonic_crypt_dataset
      pip3 install torch-optimizer 
      ```
     - Implemented early stopping with patience=5 monitoring the validation loss.
-    - The training steps with metrics and losses per each epoch of every fold is stored as csv file in **models/** folder.
+    - The training metrics and losses per each epoch is stored as csv file in **models/** folder.
 
     
 **Inference**
 
- - The inference script (inference.ipynb) performs infernce on the test data and generates submission csv. It has a lot of helper functions to predict masks at patch level and stictching back th mask patches to the original mask, for calculating the  dice socre, and generating the submission csv.
- - This notebook generates the followung csvs:
-     - submission.csv (contains test data image ids and RLE of their corresponding predicted mask)
-     - dice_report_submission.csv (Has the information of test set dice score per image and their average dice score)
-     - dice_report_train_predictions.csv (Has the information of train set dice score per image and their average dice score)
+ - The inference script (inference.ipynb) performs inference on the test data and generates submission csv. It has a lot of helper functions for predicting masks at patch level and stictching back the predicted mask patches to the full mask, for calculating the  dice score, and generating the submission csv.
+ - This notebook generates the following csvs:
+     - submission.csv (contains test data image ids and RLE of the respective predicted mask)
+     - dice_report_submission.csv (Contains test set dice scores)
+     - dice_report_train_predictions.csv (contains train set dice scores)
  - Test data scores  
  ```
                    id	                dice
@@ -125,15 +125,15 @@ Colonic_crypt_dataset
      
 - Train data dice score
 ```              
-	          id	                    dice
-1	CL_HandE_1234_B004_bottomright	  0.936980592055458
-2	CL_HandE_1234_B004_topleft	      0.9195726177015423
-3	CL_HandE_1234_B004_topright  	  0.9216310830724985
-4	HandE_B005_CL_b_RGB_bottomright	  0.8983568682591906
-5	HandE_B005_CL_b_RGB_topleft	      0.9104829978846856
-6	   Average	                      0.9174048317946749
+	          id	                       dice
+1	CL_HandE_1234_B004_bottomright	    0.936980592055458
+2	CL_HandE_1234_B004_topleft	        0.9195726177015423
+3	CL_HandE_1234_B004_topright  	    0.9216310830724985
+4	HandE_B005_CL_b_RGB_bottomright	    0.8983568682591906
+5	HandE_B005_CL_b_RGB_topleft	        0.9104829978846856
+6	   Average	                        0.9174048317946749
 ```
-** The inference is done by predicting over all the 5 models we trained and then taking the acverage pixelwise probabilities.
+** The inference is done by predicting over all the 5 models we trained and then taking the average pixelwise probabilities.
 
 **Predictions**
  - The inference.ipynb has a code to overlay predictions on the original patch. Below are the sample outputs.
@@ -151,7 +151,7 @@ Colonic_crypt_dataset
  
  ![image](overlays/HandE_B005_CL_b_RGB_bottomleft_3.jpg)
  
- I think the model didn't perform well on the above example because, majority of the crypts in training examples have darker boundary texture and the inside is more often than not lighter. In the example above, the missegmented crypt doesn't seem to have a definite dark boundary.
+ I think the model didn't perform well on the above example because, majority of the crypts in training examples have darker boundary texture and the inside is more often than not lighter. In the example above, the non segmented crypt doesn't seem to have a definite dark boundary.
  
  ![image](overlays/CL_HandE_1234_B004_bottomleft_6.jpg)
  
@@ -166,7 +166,7 @@ Colonic_crypt_dataset
  
  - Feature representation generation
      - Took the  segmentation model we trained above (with weights), and set it to return the output feature maps of the last convolutional block of the encoder.
-     - Passed the patches(train and test) through the network, generated their respective feature maps, which when flattened are one dimensional vectors.
+     - Passed the patches(train and test) through the network, generated their respective feature maps, and flattened them to one dimensional vectors.
      - Used these feature representations of the patches for visualization
      - Due to size limit on github, couldn't upload the feature_representation.pkl file. Please find it here - https://drive.google.com/file/d/1RcX8Pvi6rEx3J-RNjKbOEUFbkkToo-na/view?usp=sharing
      
@@ -174,7 +174,7 @@ Colonic_crypt_dataset
 
 ![image](viz_overlays/PCA_train_test.jpg) 
 
-As we can see, the training data and test data are very much in the same space as the data is from same domain
+As we can see, the training data and test data are very much in the same space.
 
 Here
 - class 1 represents the feature representation of a patch which has atleast one crypt.
@@ -183,7 +183,7 @@ Here
 ![image](viz_overlays/PCA_train_class.jpg) 
 ![image](viz_overlays/PCA_test_class.jpg) 
 
-The plots above represent the overlap between crypt/ non crypt class datapoints. The overlap between the classes is because as our patches with crypts also have significant backgroud (non crypt) class information.
+The plots above represent the overlap between crypt/ non crypt class datapoints. The overlap between the classes is because  our patches with crypts also have significant backgroud (non crypt) class information.
 
 
 
@@ -201,7 +201,7 @@ Here
 ![image](viz_overlays/TSNE_train_class.jpg) 
 ![image](viz_overlays/TSNE_test_class.jpg) 
 
-The plots above represent the overlap between crypt/ non crypt class datapoints. 
+The plots above shows the overlap between crypt/ non crypt class datapoints. 
 
 **UMAP**
 
@@ -213,7 +213,8 @@ Here
 
 ![image](viz_overlays/UMAP_train_class.jpg) 
 ![image](viz_overlays/UMAP_test_class.jpg) 
-The plots above represent the overlap between crypt/ non crypt class datapoints. The overlap between the classes is because as our patches with crypts also have significant backgroud (non crypt) class information.
+
+The plots above shows the overlap between crypt/ non crypt class datapoints. The overlap between the classes is again because  our patches with crypts also have significant backgroud (non crypt) class information.
 
 
 
@@ -222,7 +223,7 @@ The plots above represent the overlap between crypt/ non crypt class datapoints.
 
 ![image](viz_overlays/MDS_train_test.jpg) 
 
-The training and test datapoints are overlapping
+The training and test datapoints are overlapping.
 
 Here
 - class 1 represents the feature representation of a patch which has atleast one crypt.
@@ -230,7 +231,12 @@ Here
 
 ![image](viz_overlays/MDS_train_class.jpg) 
 ![image](viz_overlays/MDS_test_class.jpg) 
+
+
 The plots above represent the overlap between crypt/ non crypt class datapoints. The overlap between the classes is because as our patches with crypts also have significant backgroud (non crypt) class information.
+
+
+
 
 
 
