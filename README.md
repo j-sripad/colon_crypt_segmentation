@@ -43,11 +43,17 @@ Colonic_crypt_dataset
 
 ```
 **train/** has training H & E images and the annotation jsons
+
 **test/** has test H & E images and the annotation jsons
+
 **train_mask/** has training mask for all the images
+
 **test_mask/** has training mask for all the images
+
 **train.csv** has training image ids and their corresponding Run-Length Annotations
+
 **test,csv** has test image ids and their corresponding Run-Length Annotations.
+
 
 **Data Preprocessing**
 
