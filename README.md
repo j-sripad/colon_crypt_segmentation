@@ -42,17 +42,17 @@ Colonic_crypt_dataset
      .  colon-dataset_information.csv
 
 ```
-**train/** has training H & E images and the annotation jsons
+**train/** contain training H & E images and the annotation jsons
 
-**test/** has test H & E images and the annotation jsons
+**test/** contain  H & E images and the annotation jsons
 
-**train_mask/** has training mask for all the images
+**train_mask/** contain training data masks 
 
-**test_mask/** has training mask for all the images
+**test_mask/** contain test data masks 
 
-**train.csv** has training image ids and their corresponding Run-Length Annotations
+**train.csv** contain training image ids and their corresponding Run-Length encoding annotations.
 
-**test,csv** has test image ids and their corresponding Run-Length Annotations.
+**test,csv** contain test image ids and their corresponding Run-Length encoding annotations.
 
 
 **Data Preprocessing**
@@ -64,7 +64,7 @@ Colonic_crypt_dataset
     
  - Patch Generation
    - The image shape is (4536, 4704,3). So, generated patches of shape (512,512,3) for training. 
-   - For patch generation, used window size of (512,512) and stride of (256,256). So there was slight overlap. Used "valid" operation for patch generation. Also, code to ignore patches with black rectangular artifacts found on our training and testing WSIs is implemted.
+   - For patch generation, used window size of (512,512) and stride of (256,256). So there was slight overlap. Used "valid" operation for patch generation. Also, code to ignore patches with black rectangular artifacts found on our training and testing WSIs is implented.
    
     - For patch generation, **Datapreparation.ipynb** notebook is used. This notebook creates  **data/images** and **data/masks** directories to save the image patches and their coresponding masks. The notebook also returns a csv **train_data.csv** that has the following three columns.
         - Train_image_path
