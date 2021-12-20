@@ -242,6 +242,9 @@ Here
 The plots above represent the overlap between crypt/ non crypt class datapoints. The overlap between the classes is because  our patches with crypts also have significant backgroud (non crypt) class information.
 
 
+**Summary of Deep learning for cellular image analysis**
+
+file - Summary_Deep learning for cellular image analysis _Erick Moen et.al.pdf
 
 
 
