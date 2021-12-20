@@ -64,9 +64,9 @@ Colonic_crypt_dataset
     
  - Patch Generation
    - The image shape is (4536, 4704,3). So, generated patches of shape (512,512,3) for training. 
-   - For patch generation, used window size of (512,512) and stride of (256,256). So there was slight overlap. Used "valid" operation for patch generation. Also, code to ignore patches with black rectangular artifacts found on our training and testing WSIs is implented.
+   - For patch generation, used window size of (512,512) and stride of (256,256). So there was slight overlap. Used "valid" operation for patch generation. Also, code to ignore patches with black rectangular artifacts found on our training and testing WSIs is implemented.
    
-    - For patch generation, **Datapreparation.ipynb** notebook is used. This notebook creates  **data/images** and **data/masks** directories to save the image patches and their coresponding masks. The notebook also returns a csv **train_data.csv** that has the following three columns.
+    - For patch generation, **Datapreparation.ipynb** notebook is used. This notebook creates  **data/images** and **data/masks** directories to save the image patches and their corresponding masks. The notebook also returns a csv **train_data.csv** that has the following three columns.
         - Train_image_path
         - Train_mask_path
         - Class (1 if mask contain crypt annotation,else 0)
@@ -105,7 +105,7 @@ Colonic_crypt_dataset
      - I trained segmentation models using Linknet, Unet, UnetPlusPlus and  Multi-Attention network architectures with different backbone encoders like efficientnet-b2, efficientnet-b3, resnet50 etc.
      - Unet and UnetPlusPlus architectures performed the best, with Unet - efficientnetb2 fetching me the best dice score.
      - Trained the model for 5 folds. 
-     - Used crossentropy loss for training, with Ranger optimizer (RAdam + Lookahead).
+     - Used cross-entropy loss for training, with Ranger optimizer (RAdam + Lookahead).
      For Ranger optimizer please install
      ```
      pip3 install torch-optimizer 
@@ -131,13 +131,13 @@ Colonic_crypt_dataset
      
 - Train data dice score
 ```              
-	          id	                       dice
-1	CL_HandE_1234_B004_bottomright	    0.936980592055458
-2	CL_HandE_1234_B004_topleft	        0.9195726177015423
-3	CL_HandE_1234_B004_topright  	    0.9216310830724985
-4	HandE_B005_CL_b_RGB_bottomright	    0.8983568682591906
-5	HandE_B005_CL_b_RGB_topleft	        0.9104829978846856
-6	   Average	                        0.9174048317946749
+	          id	                           dice
+1	CL_HandE_1234_B004_bottomright	          0.936980592055458
+2	CL_HandE_1234_B004_topleft	          0.9195726177015423
+3	CL_HandE_1234_B004_topright  	          0.9216310830724985
+4	HandE_B005_CL_b_RGB_bottomright	          0.8983568682591906
+5	HandE_B005_CL_b_RGB_topleft	          0.9104829978846856
+6	   Average	                          0.9174048317946749
 ```
 ** The inference is done by predicting over all the 5 models we trained and then taking the average pixelwise probabilities.
 
@@ -239,7 +239,7 @@ Here
 ![image](viz_overlays/MDS_test_class.jpg) 
 
 
-The plots above represent the overlap between crypt/ non crypt class datapoints. The overlap between the classes is because as our patches with crypts also have significant backgroud (non crypt) class information.
+The plots above represent the overlap between crypt/ non crypt class datapoints. The overlap between the classes is because  our patches with crypts also have significant backgroud (non crypt) class information.
 
 
 
